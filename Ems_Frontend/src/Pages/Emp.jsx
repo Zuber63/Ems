@@ -61,51 +61,51 @@ const Emp = () => {
   });
 
   return (
-    <main className="min-h-screen bg-background pb-12">
+    <main className="min-h-screen pb-10">
       {/* Back Link */}
-      <div className="p-4 sm:p-6 pb-2">
+      <div className="pt-4 pl-3.5">
         <Link to={"/"}>
           <ChevronLeft className="cursor-pointer w-6 h-6 hover:text-primary hover:bg-primary/5 rounded-full transition-colors" />
         </Link>
       </div>
 
       {/* Content Area */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-6">
+      <div className="flex-1 overflow-y-auto px-4 sm:p-6 space-y-6">
         
         {/* Header Section */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <h1 className="text-2xl sm:text-3xl font-heading font-bold tracking-tight">Employee Directory</h1>
-            <p className="text-sm sm:text-base text-muted-foreground mt-1">
+            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mt-1">
               Manage and monitor your workforce details here.
             </p>
           </div>
-          <div>
-            <Link to={"/AddEmp"}> 
-              <button className="w-full sm:w-auto px-4 cursor-pointer py-2.5 bg-primary text-primary-foreground rounded-xl text-sm font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-lg shadow-primary/20">
+          <div className="flex items-center">
+            <Link to={"/AddEmp"} className="w-full sm:w-auto">
+              <button className="w-full sm:w-auto px-4 cursor-pointer py-2.5 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-lg shadow-primary/20">
                 <Plus className="w-4 h-4" /> Add New Employee
               </button>
-            </Link>  
+            </Link>
           </div>
         </div>
 
         {/* Search & Filters Section */}
-        <div className="flex flex-col md:flex-row gap-3 items-stretch md:items-center">
+        <div className="flex flex-col lg:flex-row gap-3 items-stretch lg:items-center">
           {/* 🔍 Search */}
           <div className="relative flex items-center flex-1">
-            <Search className="absolute left-3.5 w-4 h-4 text-muted-foreground pointer-events-none" />
+            <Search className="absolute left-3 w-4 h-4 text-muted-foreground pointer-events-none" />
             <input
               onChange={(e) => setsearch(e.target.value)}
               placeholder="Search by name, email or department…"
-              className="w-full pl-10 pr-4 py-2.5 text-sm bg-card border border-input rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all shadow-sm"
+              className="w-full pl-9 pr-4 py-2.5 text-sm bg-muted/50 border border-input rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-all"
             />
           </div>
 
           {/* 🧠 Filters */}
-          <div className="flex flex-row gap-2">
+          <div className="flex flex-col sm:flex-row gap-2">
             <select
               onChange={(e) => setdepartment(e.target.value)}
-              className="flex-1 md:w-auto text-sm bg-card border border-input rounded-xl px-3 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all shadow-sm"
+              className="text-sm bg-muted/50 border border-input rounded-lg px-3 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all"
             >
               <option value="All Departments">All Departments</option>
               <option value="Engineering">Engineering</option>
@@ -120,7 +120,7 @@ const Emp = () => {
 
             <select
               onChange={(e) => setstatus(e.target.value)}
-              className="flex-1 md:w-auto text-sm bg-card border border-input rounded-xl px-3 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all shadow-sm"
+              className="text-sm bg-muted/50 border border-input rounded-lg px-3 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all"
             >
               <option>All Statuses</option>
               <option>Active</option>
@@ -129,33 +129,33 @@ const Emp = () => {
           </div>
         </div>
 
-        {/* ================= MOBILE VIEW: CARDS (Visible on small screens, hidden on md+) ================= */}
+        {/* ================= MOBILE VIEW: CARDS (Visible only on Mobile/Tablet < md) ================= */}
         <div className="grid grid-cols-1 gap-4 md:hidden">
           {filterdata?.map((d) => (
             <div key={d?._id} className="bg-card border border-border rounded-xl p-4 shadow-sm space-y-3">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 min-w-0">
                   <img
                     src={`https://api.dicebear.com/9.x/initials/svg?seed=${d?.firstname} ${d?.lastname}`}
-                    className="w-12 h-12 rounded-full border border-border shrink-0"
+                    className="w-10 h-10 rounded-full border border-border shrink-0"
                     alt="avatar"
                   />
-                  <div>
-                    <h3 className="text-sm font-bold text-foreground">{d?.firstname} {d?.lastname}</h3>
-                    <p className="text-xs text-muted-foreground">{d?.email}</p>
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold truncate">{d?.firstname} {d?.lastname}</p>
+                    <p className="text-xs text-muted-foreground truncate">{d?.email}</p>
                   </div>
                 </div>
                 <span
-                  className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                    d?.status === "Active" ? "bg-emerald-500/10 text-emerald-600" : "bg-red-500/10 text-red-600"
+                  className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium shrink-0 ${
+                    d?.status === "Active" ? "bg-tertiary/10 text-tertiary" : "bg-red-100 text-red-600"
                   }`}
                 >
-                  <span className={`w-1.5 h-1.5 rounded-full ${d?.status === "Active" ? "bg-emerald-500" : "bg-red-500"}`}></span>
+                  <span className={`w-1.5 h-1.5 rounded-full ${d?.status === "Active" ? "bg-tertiary" : "bg-red-600"}`}></span>
                   {d?.status}
                 </span>
               </div>
 
-              <div className="flex justify-between text-xs text-muted-foreground pt-2 border-t border-border">
+              <div className="flex justify-between items-center text-xs text-muted-foreground pt-2 border-t border-border">
                 <div>
                   <span className="block text-[10px] uppercase font-semibold text-muted-foreground/70">Department</span>
                   <span className="text-foreground font-medium">{d?.department}</span>
@@ -166,20 +166,21 @@ const Emp = () => {
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-2 border-t border-border">
+              <div className="flex items-center justify-end gap-1 pt-2 border-t border-border">
                 <Link to={`/EmpView/${d._id}`}>
-                  <button className="p-2 text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all">
+                  <button title="View" className="p-2 text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all">
                     <Eye className="w-4 h-4" />
                   </button>
                 </Link>
                 <Link to={`/UpdateEmp/${d._id}`}>
-                  <button className="p-2 text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all">
+                  <button title="Edit" className="p-2 text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all">
                     <Pencil className="w-4 h-4" />
                   </button>
                 </Link>
                 <button
                   onClick={() => DeleteEmp(d._id)}
-                  className="p-2 text-muted-foreground hover:text-red-600 hover:bg-red-500/5 rounded-lg transition-all"
+                  title="Delete"
+                  className="p-2 text-muted-foreground hover:text-red-600 hover:bg-primary/5 rounded-lg transition-all"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -188,7 +189,7 @@ const Emp = () => {
           ))}
         </div>
 
-        {/* ================= DESKTOP VIEW: TABLE (Hidden on small screens, visible on md+) ================= */}
+        {/* ================= DESKTOP VIEW: TABLE (Hidden on Mobile, Visible on md+) ================= */}
         <div className="hidden md:block bg-card border border-border rounded-xl shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
@@ -209,7 +210,7 @@ const Emp = () => {
                         <div className="flex items-center gap-3">
                           <img
                             src={`https://api.dicebear.com/9.x/initials/svg?seed=${d?.firstname} ${d?.lastname}`}
-                            className="w-10 h-10 rounded-full border border-border shrink-0"
+                            className="w-10 h-10 rounded-full border border-border"
                             alt="avatar"
                           />
                           <div>
@@ -224,12 +225,12 @@ const Emp = () => {
                       <td className="px-6 py-4">
                         <span
                           className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                            d?.status === "Active" ? "bg-emerald-500/10 text-emerald-600" : "bg-red-500/10 text-red-600"
+                            d?.status === "Active" ? "bg-tertiary/10 text-tertiary" : "bg-red-100 text-red-600"
                           }`}
                         >
                           <span
                             className={`w-1.5 h-1.5 rounded-full ${
-                              d?.status === "Active" ? "bg-emerald-500" : "bg-red-500"
+                              d?.status === "Active" ? "bg-tertiary" : "bg-red-600"
                             }`}
                           ></span>
                           {d?.status}
@@ -239,7 +240,7 @@ const Emp = () => {
                         <span className="text-sm text-muted-foreground">{d?.position}</span>
                       </td>
                       <td className="px-6 py-4 text-right">
-                        <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                           <Link to={`/EmpView/${d._id}`}>
                             <button title="View" className="cursor-pointer p-2 text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all">
                               <Eye className="w-4 h-4" />
@@ -253,7 +254,7 @@ const Emp = () => {
                           <button
                             onClick={() => DeleteEmp(d._id)}
                             title="Delete"
-                            className="cursor-pointer p-2 text-muted-foreground hover:text-red-600 hover:bg-red-500/5 rounded-lg transition-all"
+                            className="cursor-pointer p-2 text-muted-foreground hover:text-red-600 hover:bg-primary/5 rounded-lg transition-all"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
