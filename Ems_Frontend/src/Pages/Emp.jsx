@@ -52,7 +52,7 @@ const Emp = () => {
     const matchSearch =
       d.firstname.toLowerCase().includes(search.toLowerCase().trim()) ||
       d.lastname.toLowerCase().includes(search.toLowerCase().trim()) ||
-      d.email.toLowerCase().includes(search.toLowerCase().trim());
+      d.email.toLowerCase().includes(search.toLowerCase().trim()).reverse();
 
     const matchStatus = status === "All Statuses" || d.status === status;
     const matchDepartment = department === "All Departments" || d.department === department;
