@@ -9,7 +9,7 @@ const [data,setdata]=useState([])
 
 const GetAllEmp = async () => {
   try {
-    const res = await fetch(`http://localhost:3000/api/v1/GetSingleEmp/${id}`);
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/GetSingleEmp/${id}`);
     
     const data = await res.json(); 
   
@@ -26,7 +26,7 @@ useEffect(() => {
 const UpdateEmployee = async (data) => {
   try {
     const res = await fetch(
-      `http://localhost:3000/api/v1/UpdateEms/${id}`,
+      `${import.meta.env.VITE_API_URL}/api/v1/UpdateEms/${id}`,
       {
         method: "PUT",
         headers: {

@@ -24,7 +24,7 @@ const Dashboard = () => {
 const [data,setdata]=useState([])
   const GetAllEmp = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/v1/GetAllEmp");
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/GetAllEmp`);
 
     const data = await res.json(); 
     setdata(data.data)

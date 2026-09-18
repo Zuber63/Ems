@@ -20,7 +20,7 @@ const [data,setdata]=useState([])
 
 const GetAllEmp = async () => {
   try {
-    const res = await fetch(`http://localhost:3000/api/v1/GetSingleEmp/${id}`);
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/GetSingleEmp/${id}`);
     
     const data = await res.json(); 
   
@@ -34,7 +34,7 @@ const DeleteEmp = async () => {
   if (!window.confirm("Are you sure to delete?")) return;
 
   try {
-    await fetch(`http://localhost:3000/api/v1/DeleteEms/${id}`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/v1/DeleteEms/${id}`, {
       method: "DELETE",
     });
 toast.success("Employee Deleted Successfully")
