@@ -1,0 +1,46 @@
+const mongoose =require("mongoose")
+const EmsSchema = new mongoose.Schema({
+        firstname:{
+        type:String,
+        required:true   
+    },
+      lastname:{
+        type:String,
+        required:true   
+    },
+    email:{
+        type:String,
+        required:true,
+        unique:true
+    },
+    phone:{
+        type:String,
+        required:true
+    },
+    department:{
+        type:String,
+        required:true
+    },
+    position:{
+        type:String,
+        required:true
+    },
+    salary:{
+        type:Number,
+        required:true
+    },
+    adress:{
+        type:String,
+        required:true
+    },
+    status:{
+        type:String,
+        required:true
+    },
+    dateOfJoining:{
+        type:Date,
+        default:Date.now
+    }
+})
+
+module.exports=mongoose.model("Ems",EmsSchema)
